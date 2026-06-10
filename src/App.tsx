@@ -11,7 +11,7 @@ import { UnderDevelopment } from '@/pages/UnderDevelopment'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/lumino">
       <LenisProvider>
         <NoiseOverlay />
         <Nav />

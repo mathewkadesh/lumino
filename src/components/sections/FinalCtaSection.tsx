@@ -62,7 +62,7 @@ export function FinalCtaSection() {
                   id="CTA-01"
                   aspect="21/9"
                   alt="Stylised illustration of a Bristol high-street row with multiple shops, one window glowing in Lumino amber"
-                  src="/img/process-fitting-pizzeria-display.png"
+                  src={`${import.meta.env.BASE_URL}img/process-fitting-pizzeria-display.png`}
                   imgClassName="scale-[1.04] object-[center_44%]"
                   className="rounded-2xl"
                 />

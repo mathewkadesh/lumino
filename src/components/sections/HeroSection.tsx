@@ -45,7 +45,7 @@ export function HeroSection() {
     >
       <div className="absolute inset-0 z-0">
         <img
-          src="/img/hero-kitchen-on-north.png"
+          src={`${import.meta.env.BASE_URL}img/hero-kitchen-on-north.png`}
           alt="Bristol restaurant with a bright Lumino LED window display"
           loading="eager"
           decoding="async"

@@ -71,7 +71,7 @@ function FootfallTab() {
           id="CAT-02"
           aspect="4/3"
           alt="Café interior at the counter with a Lumino menu display visible from outside"
-          src="/img/gallery-cafe-stokes-croft.png"
+          src={`${import.meta.env.BASE_URL}img/gallery-cafe-stokes-croft.png`}
           imgClassName="scale-[1.08] object-[center_42%]"
         />
       </div>
@@ -98,7 +98,7 @@ function UpdatesTab() {
           id="HOW-04"
           aspect="4/3"
           alt="Shop owner holding a smartphone showing the Lumino dashboard, updating a price"
-          src="/img/process-phone-price-update.png"
+          src={`${import.meta.env.BASE_URL}img/process-phone-price-update.png`}
           imgClassName="object-[center_42%]"
         />
       </div>

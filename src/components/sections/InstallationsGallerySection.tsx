@@ -18,14 +18,14 @@ interface Installation {
 }
 
 const installations: Installation[] = [
-  { id: 'GAL-01', business: "Mehmet's Grill", neighbourhood: 'Easton', type: 'Kebab shop', excerpt: 'Full-window LED panel showing rotating menu and daily specials. Footfall up noticeably since installation.', imageSrc: '/img/gallery-kebab-easton.png' },
-  { id: 'GAL-02', business: 'Harbour Café', neighbourhood: 'Stokes Croft', type: 'Café', excerpt: 'Daytime breakfast menu switches automatically to lunch at noon. No staff intervention needed.', imageSrc: '/img/gallery-cafe-stokes-croft.png' },
-  { id: 'GAL-03', business: 'Clifton & Co', neighbourhood: 'Clifton', type: 'Boutique', excerpt: 'Vertical panel beside the door rotating seasonal product imagery for a premium boutique feel.', imageSrc: '/img/gallery-boutique-clifton.png' },
-  { id: 'GAL-04', business: 'Gloucester Road Stores', neighbourhood: 'Gloucester Road', type: 'Convenience', excerpt: 'Weekly deal updates pushed by owner from phone. PayPoint and parcel collection visible from 30m.', imageSrc: '/img/gallery-convenience-store-deals.png' },
-  { id: 'GAL-05', business: 'The Bedminster Room', neighbourhood: 'Bedminster', type: 'Restaurant', excerpt: 'Curved panel wrapping the corner of the shopfront. The only curved installation in the area.', imageSrc: '/img/gallery-restaurant-southville.png' },
-  { id: 'GAL-06', business: "Paulo's Barbers", neighbourhood: 'St Pauls', type: 'Barber', excerpt: 'Price list, walk-in availability, and Instagram handle. Queue visible from the street.', imageSrc: '/img/gallery-barber-st-pauls.png' },
-  { id: 'GAL-07', business: 'Park Street Premier', neighbourhood: 'Park Street', type: 'Premier shop', excerpt: 'Rolling promotions and chilled drinks offers. Customer dwell at the window measurably improved.', imageSrc: '/img/gallery-premier-gloucester-road.png' },
-  { id: 'GAL-08', business: "Luca's Pizzeria", neighbourhood: 'Whiteladies Road', type: 'Pizzeria', excerpt: 'Night-time neon effect at dusk, mouth-watering pizza imagery. One of our most-photographed installs.', imageSrc: '/img/gallery-pizzeria-dough-day.png' },
+  { id: 'GAL-01', business: "Mehmet's Grill", neighbourhood: 'Easton', type: 'Kebab shop', excerpt: 'Full-window LED panel showing rotating menu and daily specials. Footfall up noticeably since installation.', imageSrc: `${import.meta.env.BASE_URL}img/gallery-kebab-easton.png` },
+  { id: 'GAL-02', business: 'Harbour Café', neighbourhood: 'Stokes Croft', type: 'Café', excerpt: 'Daytime breakfast menu switches automatically to lunch at noon. No staff intervention needed.', imageSrc: `${import.meta.env.BASE_URL}img/gallery-cafe-stokes-croft.png` },
+  { id: 'GAL-03', business: 'Clifton & Co', neighbourhood: 'Clifton', type: 'Boutique', excerpt: 'Vertical panel beside the door rotating seasonal product imagery for a premium boutique feel.', imageSrc: `${import.meta.env.BASE_URL}img/gallery-boutique-clifton.png` },
+  { id: 'GAL-04', business: 'Gloucester Road Stores', neighbourhood: 'Gloucester Road', type: 'Convenience', excerpt: 'Weekly deal updates pushed by owner from phone. PayPoint and parcel collection visible from 30m.', imageSrc: `${import.meta.env.BASE_URL}img/gallery-convenience-store-deals.png` },
+  { id: 'GAL-05', business: 'The Bedminster Room', neighbourhood: 'Bedminster', type: 'Restaurant', excerpt: 'Curved panel wrapping the corner of the shopfront. The only curved installation in the area.', imageSrc: `${import.meta.env.BASE_URL}img/gallery-restaurant-southville.png` },
+  { id: 'GAL-06', business: "Paulo's Barbers", neighbourhood: 'St Pauls', type: 'Barber', excerpt: 'Price list, walk-in availability, and Instagram handle. Queue visible from the street.', imageSrc: `${import.meta.env.BASE_URL}img/gallery-barber-st-pauls.png` },
+  { id: 'GAL-07', business: 'Park Street Premier', neighbourhood: 'Park Street', type: 'Premier shop', excerpt: 'Rolling promotions and chilled drinks offers. Customer dwell at the window measurably improved.', imageSrc: `${import.meta.env.BASE_URL}img/gallery-premier-gloucester-road.png` },
+  { id: 'GAL-08', business: "Luca's Pizzeria", neighbourhood: 'Whiteladies Road', type: 'Pizzeria', excerpt: 'Night-time neon effect at dusk, mouth-watering pizza imagery. One of our most-photographed installs.', imageSrc: `${import.meta.env.BASE_URL}img/gallery-pizzeria-dough-day.png` },
 ]
 
 function InstallationCard({ install, index, onOpen }: { install: Installation; index: number; onOpen: (i: Installation) => void }) {

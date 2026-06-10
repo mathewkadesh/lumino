@@ -22,7 +22,7 @@ const steps: Step[] = [
     description: 'A quick visit to measure up and figure out exactly what will work best in your space.',
     accent: 'var(--lumino-amber)',
     icon: Search,
-    image: '/img/hero-kitchen-on-north.png',
+    image: `${import.meta.env.BASE_URL}img/hero-kitchen-on-north.png`,
   },
   {
     number: '02',
@@ -30,7 +30,7 @@ const steps: Step[] = [
     description: 'Our designers build your menu, promos, and posters. You approve them before anything goes live.',
     accent: 'var(--lumino-coral)',
     icon: Palette,
-    image: '/img/process-designing-menu-content.png',
+    image: `${import.meta.env.BASE_URL}img/process-designing-menu-content.png`,
   },
   {
     number: '03',
@@ -38,7 +38,7 @@ const steps: Step[] = [
     description: 'We fit the panel, run the cabling, and make sure everything is perfect. Zero cost to you.',
     accent: 'var(--lumino-teal)',
     icon: Wrench,
-    image: '/img/process-fitting-pizzeria-display.png',
+    image: `${import.meta.env.BASE_URL}img/process-fitting-pizzeria-display.png`,
   },
   {
     number: '04',
@@ -46,7 +46,7 @@ const steps: Step[] = [
     description: 'Update prices, swap menus, run specials — all from an app on your phone in under a minute.',
     accent: 'var(--lumino-teal-2)',
     icon: Smartphone,
-    image: '/img/process-phone-price-update.png',
+    image: `${import.meta.env.BASE_URL}img/process-phone-price-update.png`,
   },
 ]
 
