@@ -16,9 +16,7 @@ import { ContactSection } from '@/components/sections/ContactSection'
 export function Home() {
   return (
     <>
-      <div className="pt-[128px]">
-        <HeroSection />
-      </div>
+      <HeroSection />
       <TrustedBySection />
       <InstallationsGallerySection />
       <BenefitsTabsSection />

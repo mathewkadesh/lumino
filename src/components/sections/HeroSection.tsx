@@ -40,7 +40,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-[calc(100svh-128px)] flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden"
       aria-label="Hero"
     >
       <div className="absolute inset-0 z-0">
