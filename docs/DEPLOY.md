@@ -1,229 +1,94 @@
 # 🚀 Lumino GitHub Pages Deployment Guide
 
-This guide walks you through deploying Lumino to GitHub Pages.
+This repo is **already set up** for GitHub Pages — this guide covers what's already in place and the one-time setup left to do.
 
 ---
 
-## 📋 Prerequisites
+## ✅ Already configured
 
-- Git installed locally
-- GitHub account with a repository named `lumino`
-- Node.js 18+ installed
+- **`vite.config.ts`** sets `base: '/lumino/'`, so built asset URLs resolve correctly at `https://mathewkadesh.github.io/lumino/`
+- **`.github/workflows/deploy.yml`** runs on every push to `main`: installs deps, runs `npm run build`, and uploads `dist/` as a Pages artifact
+- **`origin`** remote is already set to `https://github.com/mathewkadesh/lumino.git`
 
----
-
-## 🛠️ Step 1: Initialize Git & Configure Vite
-
-Update your `vite.config.ts` to set the correct base path for GitHub Pages:
-
-```typescript
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-export default defineConfig({
-  plugins: [react()],
-  base: '/lumino/',  // ← Change to your repo name
-})
-```
+So for day-to-day changes, deployment is just: **commit → push to `main`**. No manual build step required.
 
 ---
 
-## 📦 Step 2: Build the Project
+## 🛠️ One-time setup
+
+### 1. Commit and push your changes
 
 ```bash
-npm run build
-```
-
-This creates a `dist/` folder with optimized production assets.
-
----
-
-## 🌐 Step 3: Push to GitHub
-
-### Option A: Using GitHub CLI (Recommended)
-
-```bash
-# Initialize git if not already done
-git init
 git add .
-git commit -m "Initial commit: Lumino marketing site"
-
-# Create GitHub repo
-gh repo create lumino --public --source=. --remote=origin --push
+git commit -m "Update site"
+git push origin main
 ```
 
-### Option B: Manual GitHub Setup
+### 2. Enable GitHub Pages (Actions source)
+
+1. Go to your repo on GitHub → **Settings** → **Pages**
+2. Under **"Build and deployment" → Source**, select **GitHub Actions**
+3. Save
+
+That's it — GitHub will run the workflow automatically. Watch progress under the **Actions** tab.
+
+### 3. Visit your site
+
+```
+https://mathewkadesh.github.io/lumino/
+```
+
+---
+
+## 🔄 Ongoing workflow
+
+Every push to `main` triggers a rebuild + redeploy automatically:
 
 ```bash
-# Add files
-git add .
-git commit -m "Initial commit: Lumino marketing site"
-
-# Add remote
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/lumino.git
-git push -u origin main
-```
-
----
-
-## 📤 Step 4: Deploy to gh-pages Branch
-
-### Option A: Automated with GitHub Actions (Recommended)
-
-Create `.github/workflows/deploy.yml`:
-
-```yaml
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Build
-        run: npm run build
-      
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-```
-
-Then push this file:
-```bash
-git add .github/
-git commit -m "Add GitHub Actions deployment"
-git push
-```
-
-### Option B: Manual Deploy
-
-```bash
-# Build the project
-npm run build
-
-# Create gh-pages branch from dist folder
-git checkout --orphan gh-pages
-git rm -rf .
-cp -r dist/* .
-echo "# Lumino - Live Site" > README.md
-git add .
-git commit -m "Deploy Lumino to GitHub Pages"
-git push origin gh-pages --force
-```
-
----
-
-## ⚙️ Step 5: Enable GitHub Pages
-
-1. Go to your repository on GitHub
-2. Click **Settings** → **Pages**
-3. Under "Source", select **Deploy from a branch**
-4. Select branch: **gh-pages**
-5. Select folder: **/ (root)**
-6. Click **Save**
-
-GitHub will now build and deploy your site. Check the "Deployments" section for status.
-
----
-
-## 🔗 Step 6: Access Your Live Site
-
-Your site will be available at:
-
-```
-https://YOUR-USERNAME.github.io/lumino/
-```
-
-Example: `https://mathewkadesh.github.io/lumino/`
-
----
-
-## 📝 Update Custom Domain (Optional)
-
-If you have a custom domain:
-
-1. Go to **Settings** → **Pages**
-2. Enter your domain in "Custom domain"
-3. Click **Save**
-4. Add DNS records pointing to GitHub (GitHub will show instructions)
-
-Example: If you own `lumino.dev`, you can point it to GitHub Pages.
-
----
-
-## 🔄 Continuous Deployment Workflow
-
-Once GitHub Actions is set up, the deployment is automatic:
-
-```bash
-# Make changes
 git add .
 git commit -m "Update hero section"
-git push origin main  # ← Automatically triggers deployment
+git push origin main
 ```
 
-Check the **Actions** tab on GitHub to monitor the build.
+Check the **Actions** tab to monitor the build/deploy status.
+
+---
+
+## 🧭 SPA routing note
+
+This site uses `react-router-dom`'s `BrowserRouter`. GitHub Pages serves static files, so a hard refresh or direct link to a route like `/pricing` can 404 (there's no `pricing/index.html`). The homepage (`/lumino/`) and in-app navigation work fine. If direct deep-links need to work too, the common fix is adding a `404.html` that redirects back to `index.html` (SPA fallback) — ask if you'd like this added.
+
+---
+
+## 🗂️ Alternative: manual `gh-pages` branch deploy
+
+`package.json` also has a `deploy` script that builds and force-pushes `dist/` to a `gh-pages` branch:
+
+```bash
+npm run deploy
+```
+
+⚠️ This is an **alternative** to the GitHub Actions workflow above, not a complement — only use one approach. If you use this, set Pages **Source** to "Deploy from a branch" → `gh-pages` instead of "GitHub Actions". Note `dist/` is in `.gitignore`, so this script force-adds it; the GitHub Actions approach above doesn't require committing `dist/` at all.
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Site Shows 404 Error
-- Check `base: '/lumino/'` in `vite.config.ts`
-- Clear browser cache
-- Wait 1-2 minutes for GitHub to redeploy
+### Blank page / assets 404 on the live site
+- Confirm `base: '/lumino/'` in `vite.config.ts` matches your repo name exactly
+- Hard refresh / clear cache, and wait 1-2 minutes for the Pages CDN to update
 
-### GitHub Pages Not Enabled
-- Go to Settings → Pages
-- Ensure "gh-pages" branch is selected
-- Click Save again
+### Workflow doesn't run
+- Confirm the push was to `main`
+- Check **Settings → Pages → Source** is set to **GitHub Actions**
+- Check the **Actions** tab for failed runs and logs
 
-### Build Fails
-- Run `npm run build` locally to check for errors
-- Check GitHub Actions logs for error details
-
----
-
-## 📊 Deployment Checklist
-
-- [ ] Updated `vite.config.ts` with correct base path
-- [ ] Created `.github/workflows/deploy.yml` (if using Actions)
-- [ ] Pushed main branch to GitHub
-- [ ] Enabled GitHub Pages from Settings → Pages
-- [ ] Verified site is live at `https://YOUR-USERNAME.github.io/lumino/`
-- [ ] Tested all interactive features on live site
-- [ ] Added custom domain (if applicable)
-
----
-
-## 📖 Additional Resources
-
-- [GitHub Pages Documentation](https://docs.github.com/en/pages)
-- [Vite Deployment Guide](https://vitejs.dev/guide/static-deploy.html#github-pages)
-- [Actions Gh-Pages Action](https://github.com/peaceiris/actions-gh-pages)
+### Build fails
+- Run `npm run build` locally first to catch TypeScript/lint errors before pushing
 
 ---
 
 <div align="center">
-
-**Happy deploying! 🎉**
 
 [← Back to README](../README.md)
 
